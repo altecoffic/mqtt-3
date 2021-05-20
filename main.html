@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Reyes MQTT3</title>
+</head>
+
+<style>
+    body {
+        background-image: url("./bg.gif");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    h2,
+    h5 {
+        color: white;
+    }
+    
+    .cards-list {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    
+    .card {
+        margin: 20px auto;
+        width: 350px;
+        height: 300px;
+        border-radius: 40px;
+        box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+    }
+    
+    .card .card_image {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+    }
+    /* for border */
+    
+    .card .card_image img {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+        object-fit: cover;
+    }
+    /* for card background  */
+    
+    .card_image {
+        background-image: url("https://i.redd.it/b3esnz5ra34y.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .card .card_title {
+        text-align: center;
+        border-radius: 0px 0px 40px 40px;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: -80px;
+        height: 40px;
+    }
+    
+    .card:hover {
+        box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+    }
+</style>
+
+<body>
+    <center>
+        <h2 style="margin-top: 40px; ">Activity 3: Publish/Subscribe Web Client</h2>
+    </center>
+
+    <div class="cards-list">
+
+        <div class="card card1">
+            <div class="card_image">
+                <div class="card-body"><br>
+                    <center>
+                        <h5 class="card-title text-light">Publish</h5>
+                    </center> <br>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><img src="../sd190-mqttjs-javascript-resources/checklist.png" alt="" style="width: 20px;"></span>
+                        </div>
+                        <input type="text" id="pubTopic" class="form-control" placeholder="Topic" aria-label="Topic" aria-describedby="basic-addon1">
+                    </div><br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><img src="../sd190-mqttjs-javascript-resources/chat.png" alt="" style="width: 20px;"></span>
+                        </div>
+                        <input type="text" id="pubPayload" class="form-control" placeholder="Payload" aria-label="Payload" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group mt-4" style="margin-left: 150px;">
+                        <button id="publishBtn" class="btn btn-info btn-md">Publish <ion-icon name="send-outline"></ion-icon></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card card2">
+            <div class="card_image">
+                <div class="card-body"><br>
+
+                    <center>
+                        <h5 class="card-title text-light">Subscribe</h5>
+                    </center><br>
+
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><img src="../sd190-mqttjs-javascript-resources/checklist.png" alt="" style="width: 20px;"></span>
+                        </div>
+                        <input type="text" id="subTopic" class="form-control" placeholder="Topic" aria-label="Topic" aria-describedby="basic-addon1">
+                    </div><br><br>
+
+                    <div class="input-group mt-4" style="margin-left: 150px;">
+                        <span><button id="subscribeBtn" class="btn btn-info btn-md ">Subscribe <ion-icon name="chevron-forward-circle-outline "></ion-icon></button></span>
+                    </div>
+
+                    <br><br>
+                </div>
+
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="card-body card_image ">
+                <table class="table table-hover text-light " id="Table">
+                    <h5 style=" margin-top: 30px;">Message <span><button class="btn btn-info btn-md"onclick="deleteRow(this)" id="clear" style="float: right;">Clear</button></span> </h5>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Topic</th>
+                            <th scope="col">Payload</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="./browserMqtt.js"></script>
+    <script src="./main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+
+
+</html>
